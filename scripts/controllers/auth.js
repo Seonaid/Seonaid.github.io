@@ -1,22 +1,27 @@
 'use strict';
 
-app.controller('AuthController', function($scope, $location, Auth){
+app.controller('AuthController', function($scope, $location, Auth, toaster){
+
+	if(Auth.signedIn()) {
+		$location.path('/');
+	}
+
 	$scope.register = function(user) {
 		Auth.register(user).then(function(){
-			console.log("Registered successfully");
+			toaster.pop('success', "Registered successfully");
 			$location.path('/');
 		}, function(err) {
-			console.log("Error...");
+			toaster.pop('error', "Registration failed");
 		});
 	};
 
 	$scope.login = function(user) {
 		Auth.login(user)
 		.then(function(){
-			console.log("Logged in successfully");
+			toaster.pop('success', "Logged in successfully");
 			$location.path('/');
 		}, function(err) {
-			console.log("Error in login");
+			toaster.pop('error', "Login failed");
 		});
 	};
 
@@ -28,9 +33,9 @@ app.controller('AuthController', function($scope, $location, Auth){
 			$scope.user.oldPassword = '';
 			$scope.user.newPassword = '';
 
-			console.log("Password changed successfully");
+			toaster.pop('success' ,"Password changed successfully");
 		}, function(err){
-			console.log("Password change error.");
+			toaster.pop('error', "Password change error");
 		});
 	};
 
