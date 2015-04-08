@@ -120,22 +120,23 @@
 							    </div>
 						    </div>
 
-						    <div class = "row" ng-show = "isOpen(selectedTask)">
-						    	<div clas = "col-md-12">
-						    		<form ng-submit = "addComment()">
-						    			<div class = "input-group">
-						    				<div class = "input-group-addon">
-						    					<img ng-src="{{user.profile.gravatar}} " class ="img-circle comment gravatar">
-						    				</div>
-						    				<input type = "text" ng-model = "content" cols = "10" rows = "3" class = "form-control" placeholder = "Comment here... " required><br>
-						    			</div>
+								<div class="row" ng-show="isOpen(selectedTask)">
+									<div class="col-md-12">
+										<form ng-submit="addComment()">	
 
-						    			<span class = "pull-right">
-						    				<input type = "submit" class = "btn btn-info" value = "Comment">
-					    				</span>
-						    		</form>
-						    	</div>
-						    </div>
+											<div class="input-group">
+												<div class="input-group-addon">
+													<img ng-src="{{ user.profile.gravatar }}" class="img-circle comment gravatar">
+												</div>
+									      <input type="text" ng-model="content" cols="10" rows="3" class="form-control" placeholder="Comment here..." required><br>
+									    </div>
+
+											<span class="pull-right">
+												<input type="submit" class="btn btn-info" value="Comment">
+											</span>
+										</form>
+									</div>
+								</div>
 					    </div>
 					
 					</div>			
