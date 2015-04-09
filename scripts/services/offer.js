@@ -1,6 +1,6 @@
 'use strict'
 
-app.factory('Offer', function(FURL, $firebase, $q, Auth){
+app.factory('Offer', function(FURL, $firebase, $q, Auth, Task){
 	var ref = new Firebase(FURL);
 	var user = Auth.user;
 
@@ -42,6 +42,14 @@ app.factory('Offer', function(FURL, $firebase, $q, Auth){
 
 		cancelOffer: function(taskId, offerId){
 			return this.getOffer(taskId, offerId).$remove();
+		},
+
+		acceptOffer: function(taskId, offerId, runnerID) {
+			var offer = this.getOffer(taskId, offerId);
+			return offer.$update({accepted: true}).then(function(){
+				var task = Task.getTask(taskId);
+				return task.$update({status: 'assigned', runner: runnerID});
+			});
 		}
 
 	};
