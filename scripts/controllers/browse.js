@@ -39,6 +39,8 @@ app.controller('BrowseController', function($scope, $routeParams, toaster, Task,
 		$scope.offers = Offer.offers(task.$id);
 
 		$scope.block = false;
+
+		$scope.isOfferMaker = Offer.isMaker;
 	};
 
 	// --------------- TASK ---------------	
@@ -72,9 +74,20 @@ app.controller('BrowseController', function($scope, $routeParams, toaster, Task,
 		Offer.makeOffer($scope.selectedTask.$id, offer).then(function(){
 			toaster.pop('success', 'Your offer has been placed');
 			$scope.total = '';
+			// we don't let the same user make more than one offer, so the offer modal is disabled and the Bid Now button is removed
 			$scope.block = true;
 			$scope.alreadyOffered = true;
 
 		});
 	};
+
+	$scope.cancelOffer = function(offerId) {
+		Offer.cancelOffer($scope.selectedTask.$id, offerId).then(function(){
+			toaster.pop('success', "Your offer has been cancelled");
+
+// Then the current user can make a different offer, so we turn the button back on.
+			$scope.alreadyOffered = false;
+			$scope.block = false;
+		});
+	}
 });
