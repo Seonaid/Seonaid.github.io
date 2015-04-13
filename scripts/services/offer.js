@@ -44,11 +44,11 @@ app.factory('Offer', function(FURL, $firebase, $q, Auth, Task){
 			return this.getOffer(taskId, offerId).$remove();
 		},
 
-		acceptOffer: function(taskId, offerId, runnerID) {
-			var offer = this.getOffer(taskId, offerId);
-			return offer.$update({accepted: true}).then(function(){
+		acceptOffer: function(taskId, offerId, runnerId) {
+			var o = this.getOffer(taskId, offerId);
+			return o.$update({accepted: true}).then(function(){
 				var task = Task.getTask(taskId);
-				return task.$update({status: 'assigned', runner: runnerID});
+				return task.$update({status: 'assigned', runner: runnerId});
 			});
 		}
 

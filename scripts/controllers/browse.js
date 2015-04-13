@@ -32,7 +32,10 @@ app.controller('BrowseController', function($scope, $routeParams, toaster, Task,
 			$scope.isTaskCreator = Task.isCreator;
 			
 			// Check if the selectedTask is open
-			$scope.isOpen = Task.isOpen;			
+			$scope.isOpen = Task.isOpen;
+
+			$scope.isAssignee = Task.isAssignee;
+			$scope.isCompleted = Task.isCompleted;	
 		}
 
 		$scope.comments = Comment.comments(task.$id);
@@ -96,5 +99,11 @@ app.controller('BrowseController', function($scope, $routeParams, toaster, Task,
 			.then(function(){
 				toaster.pop('success', 'Offer is accepted');
 			});
-	}
+	};
+
+	$scope.completeTask = function(taskId) {
+		Task.completeTask(taskId).then(function(){
+			toaster.pop('succsess', 'Task marked complete');
+		});
+	};
 });
