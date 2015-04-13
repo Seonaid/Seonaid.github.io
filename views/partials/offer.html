@@ -1,4 +1,4 @@
-<div class="modal fade" id="offModal" ng-controller = "BrowseController">
+<div class="modal fade" id="offModal">
   <div class="modal-dialog">
     <div class="modal-content">
 
@@ -11,8 +11,8 @@
     		</div>
     		<div class = "panel-body">
 	 			<form ng-submit = "makeOffer()">
-					<input type = "number" ng-model = "total" class = "form-control" placeholder ="How much do you want to be paid to perform this task?" required ng-disabled="block">
-					<input type = "submit" value = "Offer Now" class = "btn btn-warning" ng-disabled="block">
+					<input type = "number" ng-model = "$parent.total" class = "form-control" placeholder ="How much do you want to be paid to perform this task?" required ng-disabled="$parent.block">
+					<input type = "submit" value = "Offer Now" class = "btn btn-warning" ng-disabled="$parent.block">
 				</form>   			
     		</div>
     	</div>
