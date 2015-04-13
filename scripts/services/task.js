@@ -14,7 +14,17 @@ app.factory('Task', function(FURL, $firebase, Auth) {
 				
 		createTask: function(task) {
 			task.datetime = Firebase.ServerValue.TIMESTAMP;
-			return tasks.$add(task);
+			return tasks.$add(task)
+				.then(function(newTask){
+					var obj = {
+						taskId: newTask.key(),
+						type: true,
+						title: task.title
+					};
+
+					$firebase(ref.child('user_tasks').child(task.poster)).$push(obj);
+					return newTask;
+			});
 		},
 
 		editTask: function(task) {
