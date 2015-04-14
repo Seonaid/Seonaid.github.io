@@ -27,6 +27,20 @@ app.factory('Task', function(FURL, $firebase, Auth) {
 			});
 		},
 
+		createUserTasks: function(taskId){
+			console.log(taskId);
+			Task.getTask(taskId).$asObject().$loaded()
+				.then(function(task){
+					var obj = {
+						taskId: taskId,
+						type: false,
+						title: task.title
+					};
+					console.log('adding object to runner list: ' + obj);
+					return $firebase(ref.child('user_tasks').child(task.runner)).$push(obj);
+				});
+		},
+
 		editTask: function(task) {
 			var t = this.getTask(task.$id);			
 			return t.$update({title: task.title, description: task.description, total: task.total});
