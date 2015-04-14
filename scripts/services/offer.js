@@ -54,6 +54,21 @@ app.factory('Offer', function(FURL, $firebase, $q, Auth, Task){
 				console.log('adding task to createUserTasks: ' + taskId);
 				return Task.createUserTasks(taskId);
 			});
+		},
+
+		notifyRunner: function(taskId, runnerId) {
+			console.log('notifying runner');
+			Auth.getProfile(runnerId).$loaded().then(function(runner){
+				var n = {
+					taskId: taskId,
+					email: runner.email,
+					name: runner.name
+				};
+
+				var notifications = $firebase(ref.child('notifications')).$asArray();
+				console.log(n);
+				return notifications.$add(n);
+			});
 		}
 
 	};

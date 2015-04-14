@@ -98,12 +98,14 @@ app.controller('BrowseController', function($scope, $routeParams, toaster, Task,
 		Offer.acceptOffer($scope.selectedTask.$id, offerId, runnerId)
 			.then(function(){
 				toaster.pop('success', 'Offer is accepted');
+				console.log('accepting offer');
+				Offer.notifyRunner($scope.selectedTask.$id, runnerId);
 			});
 	};
 
 	$scope.completeTask = function(taskId) {
 		Task.completeTask(taskId).then(function(){
-			toaster.pop('succsess', 'Task marked complete');
+			toaster.pop('success', 'Task marked complete');
 		});
 	};
 });
