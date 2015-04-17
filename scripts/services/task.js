@@ -71,6 +71,11 @@ app.factory('Task', function(FURL, $firebase, Auth) {
 
 		isCompleted: function(task) {
 			return task.status === "completed";
+		},
+
+		verifyTask: function(taskId) {
+			var t = this.getTask(taskId);
+			return t.$update({status: "verified"}); // this is also where the payment step would take place
 		}
 	};
 

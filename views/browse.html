@@ -83,6 +83,10 @@
 							<button class = "btn btn-danger btn-sm" ng-click ="completeTask(selectedTask.$id)">Complete</button>
 						</div>
 
+						<div ng-show = "isTaskCreator(selectedTask) && isCompleted(selectedTask)">
+							<button class = "btn btn-success btn-sm" ng-click="verifyTask(selectedTask.$id)">Verify</button>
+						</div>
+
 					</div>
 				</div>
 			</div>

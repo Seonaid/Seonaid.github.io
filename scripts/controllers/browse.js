@@ -108,4 +108,10 @@ app.controller('BrowseController', function($scope, $routeParams, toaster, Task,
 			toaster.pop('success', 'Task marked complete');
 		});
 	};
+
+	$scope.verifyTask = function(taskId) {
+		Task.verifyTask(taskId).then(function(){
+			toaster.pop('success', 'Task verified and closed');
+		});
+	}
 });
