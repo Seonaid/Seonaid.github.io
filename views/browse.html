@@ -132,6 +132,7 @@
 
 									<!-- If the current user is the original poster, they can see the offers and have accept buttons available -->
 									<button ng-show= "isTaskCreator(selectedTask) && isOpen(selectedTask)" class = "btn btn-info btn-xs" ng-click = "acceptOffer(offer.$id, offer.uid)">Agree to Pay: ${{offer.total}}</button>
+									<div ng-show = "isTaskCreator(selectedTask) && isOpen(selectedTask)"> <strong>Details:</strong> {{offer.description}} </div>
 
 									<!-- If the current user made this offer, they can see it, and have the ability to cancel it -->
 									<button ng-show = "isOfferMaker(offer) && isOpen(selectedTask)" class = "btn btn-danger btn-xs" ng-click = "cancelOffer(offer.$id)">Cancel my bid: ${{offer.total}}</button>

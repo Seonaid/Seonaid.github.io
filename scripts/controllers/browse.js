@@ -69,6 +69,7 @@ app.controller('BrowseController', function($scope, $routeParams, toaster, Task,
 	$scope.makeOffer = function() {
 		var offer = {
 			total: $scope.total,
+			description: $scope.description,
 			uid: $scope.user.uid,
 			name: $scope.user.profile.name,
 			gravatar: $scope.user.profile.gravatar
@@ -77,6 +78,7 @@ app.controller('BrowseController', function($scope, $routeParams, toaster, Task,
 		Offer.makeOffer($scope.selectedTask.$id, offer).then(function(){
 			toaster.pop('success', 'Your offer has been placed');
 			$scope.total = '';
+			$scope.description = '';
 			// we don't let the same user make more than one offer, so the offer modal is disabled and the Bid Now button is removed
 			$scope.block = true;
 			$scope.alreadyOffered = true;

@@ -12,6 +12,7 @@
     		<div class = "panel-body">
 	 			<form ng-submit = "makeOffer()">
 					<input type = "number" ng-model = "$parent.total" class = "form-control" placeholder ="How much do you want to be paid to perform this task?" required ng-disabled="$parent.block">
+                    <textarea ng-model="$parent.description" class = "form-control" placeholder = "Extra information?" required></textarea>
 					<input type = "submit" value = "Offer Now" class = "btn btn-warning" ng-disabled="$parent.block">
 				</form>   			
     		</div>
