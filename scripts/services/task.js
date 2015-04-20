@@ -36,7 +36,7 @@ app.factory('Task', function(FURL, $firebase, Auth) {
 						type: false,
 						title: task.title
 					};
-					console.log('adding object to runner list: ' + obj);
+					//console.log('adding object to runner list: ' + obj);
 					return $firebase(ref.child('user_tasks').child(task.runner)).$push(obj);
 				});
 		},
@@ -70,7 +70,7 @@ app.factory('Task', function(FURL, $firebase, Auth) {
 		},
 
 		isCompleted: function(task) {
-			return task.status === "completed";
+			return (task.status === "completed" || task.status === "verified");
 		},
 
 		verifyTask: function(taskId) {

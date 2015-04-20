@@ -46,18 +46,25 @@ app.factory('Offer', function(FURL, $firebase, $q, Auth, Task){
 
 		acceptOffer: function(taskId, offerId, runnerId) {
 			var o = this.getOffer(taskId, offerId);
-			return o.$update({accepted: true}).then(function(){
-				var task = Task.getTask(taskId);
-				return task.$update({status: 'assigned', runner: runnerId});
-			})
-			.then(function(){
-				console.log('adding task to createUserTasks: ' + taskId);
-				return Task.createUserTasks(taskId);
+			return o.$asObject().$loaded().then(function(offer){
+				console.log("Current offer is: ");
+				console.log(offer);
+				console.log('total is: ');
+				console.log(offer.total);
+
+				return o.$update({accepted: true}).then(function(){
+					var task = Task.getTask(taskId);
+					return task.$update({status: 'assigned', runner: runnerId, agreedPrice: offer.total});
+				})
+				.then(function(){
+					//console.log('adding task to createUserTasks: ' + taskId);
+					return Task.createUserTasks(taskId);
+				});
 			});
 		},
 
 		notifyRunner: function(taskId, runnerId) {
-			console.log('notifying runner');
+			//console.log('notifying runner');
 			Auth.getProfile(runnerId).$loaded().then(function(runner){
 				var n = {
 					taskId: taskId,
